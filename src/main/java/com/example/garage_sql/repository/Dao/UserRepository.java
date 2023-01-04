@@ -1,19 +1,14 @@
 package com.example.garage_sql.repository.Dao;
 
-import com.example.garage_sql.model.Car;
 import com.example.garage_sql.model.User;
-import com.example.garage_sql.model.UserGarage;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+import javax.naming.InsufficientResourcesException;
 import java.util.List;
 
-public interface UserRepository {
+@Repository
+public interface UserRepository extends CrudRepository<User, Integer> {
 
-    User getById (int id);
-    List<User> getAllUsers ();
-    User saveUser (User user);
-    Car saveCarUser(int id, Car carUser);
-    List<UserGarage> getUserCars (int id);
-    User updeteUser(int id, User client);
-    String deleteUser(int id);
-
+    List<User> findAll();
 }

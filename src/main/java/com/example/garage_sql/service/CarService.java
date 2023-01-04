@@ -2,7 +2,10 @@ package com.example.garage_sql.service;
 
 import com.example.garage_sql.model.Car;
 import com.example.garage_sql.repository.Dao.CarRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @Service
@@ -15,22 +18,24 @@ public class CarService {
     }
 
     public Car saveCar (Car car){
-        return carRepository.saveCar(car);
+        return carRepository.save(car);
     }
 
     public Car getById (int id){
-        return carRepository.getById(id);
+        return carRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public List<Car> getAllCars (){
-        return carRepository.getAllCars();
+        return carRepository.findAll();
     }
+
 
     public Car updateCar (int id, Car car){
-        return carRepository.updateCar(id, car);
+        car.setId(id);
+        return carRepository.save(car);
     }
 
-    public String deleteCar(int id) {
-        return carRepository.deleteCar(id);
+    public void deleteCar(int id) {
+        carRepository.deleteById(id);
     }
 }

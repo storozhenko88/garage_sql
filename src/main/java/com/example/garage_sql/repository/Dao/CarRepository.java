@@ -1,13 +1,12 @@
 package com.example.garage_sql.repository.Dao;
 
 import com.example.garage_sql.model.Car;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-public interface CarRepository {
-
-    Car saveCar(Car car);
-    Car getById(int id);
-    List<Car> getAllCars();
-    Car updateCar(int id, Car auto);
-    String deleteCar(int id);
+@Repository
+public interface CarRepository extends CrudRepository<Car, Integer> {
+    List<Car> findAll();
 }

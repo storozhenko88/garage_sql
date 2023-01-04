@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/cars")
-    public List<UserGarage> getUserCars(@PathVariable int id) {
+    public List<Car> getUserCars(@PathVariable int id) {
           return userService.getUserCars(id);
     }
 
@@ -49,8 +49,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable int id) {
-        return userService.deleteUser(id);
+    public void deleteUser(@PathVariable int id) {
+         userService.deleteUser(id);
     }
 }
 

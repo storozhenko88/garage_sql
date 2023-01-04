@@ -4,7 +4,6 @@ import com.example.garage_sql.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.naming.InsufficientResourcesException;
 import java.util.List;
 
 @Repository

@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class Car {
     private int id;
     private String brand;
-    private int owner_id;
+    private int ownerId;
 }

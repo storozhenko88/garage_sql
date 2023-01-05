@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public User updeteUser(int id, User user) {
-        user.setId(id);
+        user.setUserId(id);
         return userRepository.save(user);
     }
 

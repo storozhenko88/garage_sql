@@ -31,7 +31,7 @@ public class CarService {
 
 
     public Car updateCar (int id, Car car){
-        car.setId(id);
+        car.setCarId(id);
         return carRepository.save(car);
     }
 

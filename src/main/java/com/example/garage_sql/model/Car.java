@@ -14,7 +14,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("cars")
 public class Car {
     @Id
-    private int id;
+    private Integer carId;
     private String brand;
-    private int owner_id;
+    private Integer ownerId;
 }

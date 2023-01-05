@@ -1,7 +1,6 @@
 package com.example.garage_sql.controller;
 import com.example.garage_sql.model.Car;
 import com.example.garage_sql.model.User;
-import com.example.garage_sql.model.UserGarage;
 import com.example.garage_sql.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

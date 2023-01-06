@@ -48,7 +48,7 @@ public class UserServiceTest {
                 .brand("bmw")
                 .ownerId(1).build();
         Mockito.when(carRepository.save(any())).thenReturn(bmw);
-        Car car = carService.saveCar(new Car());
+        Car car = userService.saveCarUser(anyInt(), new Car());
         Assertions.assertEquals(bmw, car);
     }
     @Test

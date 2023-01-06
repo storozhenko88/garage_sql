@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserGarage {
 
-    private int userId;
+    private int user_id;
     private String name;
     private String surname;
-    private int carId;
+    private int car_id;
     private String brand;
 }

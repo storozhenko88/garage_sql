@@ -1,7 +1,6 @@
 package com.example.garage_sql.controller;
 import com.example.garage_sql.model.Car;
 import com.example.garage_sql.model.User;
-import com.example.garage_sql.model.UserGarage;
 import com.example.garage_sql.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/cars")
-    public List<UserGarage> getUserCars(@PathVariable int id) {
+    public List<Car> getUserCars(@PathVariable int id) {
           return userService.getUserCars(id);
     }
 
@@ -45,12 +44,12 @@ public class UserController {
     }
     @PutMapping("/{id}")
     public User updateUser (@PathVariable int id,@RequestBody User user){
-        return userService.updeteUser(id, user);
+        return userService.updateUser(id, user);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable int id) {
-        return userService.deleteUser(id);
+    public void deleteUser(@PathVariable int id) {
+         userService.deleteUser(id);
     }
 }
 

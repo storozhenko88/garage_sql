@@ -38,7 +38,7 @@ public class CarServiceTest {
                 .brand("audi")
                 .ownerId(1).build();
         Mockito.when(carRepository.save(any())).thenReturn(audi);
-        Car car = carService.saveCar(new Car());
+        Car car = carService.saveCar(new Car("bmw", 2));
         Assertions.assertEquals(audi, car);
     }
 
@@ -64,8 +64,8 @@ public class CarServiceTest {
     @Test
     public void getAllCarsTest(){
         List<Car> cars = List.of(
-                new Car(1, "mazda", 1),
-                new Car(2, "opel", 2));
+                new Car("mazda", 1),
+                new Car("opel", 2));
         Mockito.when(carRepository.findAll()).thenReturn(cars);
         List<Car> usersCars = carService.getAllCars();
         Assertions.assertEquals(cars, usersCars);
@@ -78,7 +78,7 @@ public class CarServiceTest {
                 .brand("kamaz")
                 .ownerId(3).build();
         Mockito.when(carRepository.save(any())).thenReturn(kamaz);
-        Car car = carService.updateCar(anyInt(), new Car());
+        Car car = carService.updateCar(anyInt(), new Car("bmw", 2));
         Assertions.assertEquals(kamaz, car);
     }
 }

@@ -13,3 +13,4 @@ CREATE TABLE "users"
     primary key (user_id)
 );
 
+//INSERT INTO "cars" (car_id ,brand, owner_id) VALUES (1, 'bmw', 1 );

@@ -52,7 +52,7 @@ public class UserServiceTest {
                 .brand("bmw")
                 .ownerId(1).build();
         Mockito.when(carRepository.save(any())).thenReturn(bmw);
-        Car car = userService.saveCarUser(anyInt(), new Car());
+        Car car = userService.saveCarUser(anyInt(), new Car("bmw", 2));
         Assertions.assertEquals(bmw, car);
     }
     @Test
@@ -85,8 +85,8 @@ public class UserServiceTest {
     @Test
     public void getUserCarsTest() {
         List<Car> cars = List.of(
-                new Car(1, "audi", 1),
-                new Car(2, "lexus", 1));
+                new Car("audi", 1),
+                new Car("lexus", 1));
 
         Mockito.when(carRepository.findCarByOwnerId(anyInt())).thenReturn(cars);
         List<Car> userCars = userService.getUserCars(anyInt());

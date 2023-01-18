@@ -39,6 +39,14 @@ public class CarControllerTest {
     }
 
     @Test
+    public void getByIdNotFoundTest() throws Exception {
+        Car tesla = carRepository.save(Car.builder().brand("tesla").ownerId(3).build());
+        mockMvc.perform(get("/cars/{id}", 100))
+                .andExpect(status().isNotFound())
+                .andReturn();
+    }
+
+    @Test
     public void saveCarTest() throws Exception {
         Car niva = carRepository.save(Car.builder().brand("niva").ownerId(3).build());
         mockMvc.perform(MockMvcRequestBuilders

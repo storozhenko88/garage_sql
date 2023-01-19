@@ -17,4 +17,9 @@ public class Car {
     private Integer carId;
     private String brand;
     private Integer ownerId;
+
+    public Car (String brand, Integer ownerId){
+        this.brand = brand;
+        this.ownerId = ownerId;
+    }
 }

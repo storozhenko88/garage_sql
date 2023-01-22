@@ -17,16 +17,14 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    @Cacheable(value = "cars", key = "#id")
+    @Cacheable(value = "car", key = "#id")
     public Car getById (@PathVariable int id){
-        System.out.println("hello id");
         return carService.getById(id);
     }
 
     @GetMapping
     @Cacheable(value = "cars")
     public List<Car> getAllCars (){
-        System.out.println("hello");
         return carService.getAllCars();
     }
 

@@ -18,6 +18,8 @@ public class Car {
     private String brand;
     private Integer ownerId;
 
+    private String model;
+
     public Car (String brand, Integer ownerId){
         this.brand = brand;
         this.ownerId = ownerId;

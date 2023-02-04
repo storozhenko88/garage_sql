@@ -5,10 +5,20 @@ CREATE TABLE public.cars
     primary key (car_id)
 );
 
-CREATE TABLE public.users
+CREATE TABLE public.owners
 (
     user_id integer NOT NULL GENERATED ALWAYS AS IDENTITY,
     name text,
     surname text,
     primary key (user_id)
+);
+
+CREATE TABLE public.users
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY,
+    email text,
+    password text,
+    first_name text,
+    last_name text,
+    primary key (id)
 );

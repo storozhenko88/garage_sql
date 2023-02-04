@@ -1,9 +1,9 @@
 package com.example.garage_sql.service;
 
 import com.example.garage_sql.model.Car;
-import com.example.garage_sql.model.User;
+import com.example.garage_sql.model.Owner;
 import com.example.garage_sql.repository.Dao.CarRepository;
-import com.example.garage_sql.repository.Dao.UserRepository;
+import com.example.garage_sql.repository.Dao.OwnerRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -23,26 +23,26 @@ import static org.mockito.ArgumentMatchers.anyInt;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(MockitoExtension.class)
 @ActiveProfiles("dev")
-public class UserServiceTest {
+public class OwnerServiceTest {
 
-    private UserRepository userRepository = Mockito.mock(UserRepository.class);
+    private OwnerRepository userRepository = Mockito.mock(OwnerRepository.class);
     private CarRepository carRepository = Mockito.mock(CarRepository.class);
-    private UserService userService;
+    private OwnerService ownerService;
     private CarService carService;
 
     @Before
     public void init() {
-        userService = new UserService(userRepository, carRepository);
+        ownerService = new OwnerService(userRepository, carRepository);
         carService = new CarService(carRepository);
     }
     @Test
     public void saveUserTest() {
-        User dmytro = User.builder()
+        Owner dmytro = Owner.builder()
                 .userId(1)
                 .name("Dmytro")
                 .surname("Storozhenko").build();
         Mockito.when(userRepository.save(any())).thenReturn(dmytro);
-        User user = userService.saveUser(new User());
+        Owner user = ownerService.saveUser(new Owner());
         Assertions.assertEquals(user, dmytro);
     }
     @Test
@@ -52,34 +52,34 @@ public class UserServiceTest {
                 .brand("bmw")
                 .ownerId(1).build();
         Mockito.when(carRepository.save(any())).thenReturn(bmw);
-        Car car = userService.saveCarUser(anyInt(), new Car("bmw", 2));
+        Car car = ownerService.saveCarUser(anyInt(), new Car("bmw", 2));
         Assertions.assertEquals(bmw, car);
     }
     @Test
     public void updateUserTest() {
-        User kiril = User.builder()
+        Owner kiril = Owner.builder()
                 .userId(2)
                 .name("Kiril")
                 .surname("Ivanov").build();
         Mockito.when(userRepository.save(any())).thenReturn(kiril);
-        User user = userService.updateUser(anyInt(), new User());
+        Owner user = ownerService.updateUser(anyInt(), new Owner());
         Assertions.assertEquals(kiril, user);
     }
     @Test
     public void getUserByIdTest() {
-        User oleg = User.builder()
+        Owner oleg = Owner.builder()
                 .userId(3)
                 .name("Oleg")
                 .surname("Popovich").build();
         Mockito.when(userRepository.findById(anyInt())).thenReturn(Optional.of(oleg));
-        User user = userService.getUserById(anyInt());
+        Owner user = ownerService.getUserById(anyInt());
         Assertions.assertEquals(oleg, user);
     }
     @Test
     public void getUserByIdNotFoundTest() {
         Mockito.when(userRepository.findById(anyInt())).thenReturn(Optional.empty());
         ResponseStatusException responseStatusException = Assertions.assertThrows(
-                ResponseStatusException.class, () -> userService.getUserById(anyInt()));
+                ResponseStatusException.class, () -> ownerService.getUserById(anyInt()));
         Assertions.assertEquals("404 NOT_FOUND", responseStatusException.getMessage());
     }
     @Test
@@ -89,16 +89,16 @@ public class UserServiceTest {
                 new Car("lexus", 1));
 
         Mockito.when(carRepository.findCarByOwnerId(anyInt())).thenReturn(cars);
-        List<Car> userCars = userService.getUserCars(anyInt());
+        List<Car> userCars = ownerService.getUserCars(anyInt());
         Assertions.assertEquals(cars, userCars);
     }
     @Test
     public void getAllUserTest() {
-        List<User> users = List.of(
-                new User(1, "Oly", "Novikova"),
-                new User(2, "Valy", "Petrova"));
+        List<Owner> users = List.of(
+                new Owner(1, "Oly", "Novikova"),
+                new Owner(2, "Valy", "Petrova"));
         Mockito.when(userRepository.findAll()).thenReturn(users);
-        List<User> usersList = userService.getAllUser();
+        List<Owner> usersList = ownerService.getAllUser();
         Assertions.assertEquals(usersList, users);
     }
 }

@@ -1,10 +1,9 @@
 package com.example.garage_sql.controller;
 
 import com.example.garage_sql.model.Car;
-import com.example.garage_sql.model.User;
+import com.example.garage_sql.model.Owner;
 import com.example.garage_sql.repository.Dao.CarRepository;
-import com.example.garage_sql.repository.Dao.UserRepository;
-import com.example.garage_sql.service.UserService;
+import com.example.garage_sql.repository.Dao.OwnerRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +22,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("dev")
-public class UserControllerTest {
+public class OwnerControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private UserRepository userRepository;
+    private OwnerRepository userRepository;
 
     @Autowired
     private CarRepository carRepository;
 
     @Test
     public void getUserTest() throws Exception{
-        User dima = userRepository.save(User.builder().name("Dima").surname("Storozhenko").build());
+        Owner dima = userRepository.save(Owner.builder().name("Dima").surname("Storozhenko").build());
         mockMvc.perform(get("/users/{id}", dima.getUserId()))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -43,7 +42,7 @@ public class UserControllerTest {
 
     @Test
     public void getUserNotFoundTest() throws Exception{
-        User rima = userRepository.save(User.builder().name("Rima").surname("Sokolova").build());
+        Owner rima = userRepository.save(Owner.builder().name("Rima").surname("Sokolova").build());
         mockMvc.perform(get("/users/{id}", 5))
                 .andExpect(status().isNotFound())
                 .andReturn();
@@ -51,14 +50,14 @@ public class UserControllerTest {
 
     @Test
     public void getAllUserTest() throws Exception{
-        User lina = userRepository.save(User.builder().name("Lina").surname("Kozlova").build());
-        User vova = userRepository.save(User.builder().name("Vova").surname("Ivanov").build());
+        Owner lina = userRepository.save(Owner.builder().name("Lina").surname("Kozlova").build());
+        Owner vova = userRepository.save(Owner.builder().name("Vova").surname("Ivanov").build());
         mockMvc.perform(get("/users")).andExpect(status().isOk()).andReturn();
     }
 
     @Test
     public void getUserCarsTest() throws Exception{
-        User kiril = userRepository.save(User.builder().name("Kiril").surname("Kozov").build());
+        Owner kiril = userRepository.save(Owner.builder().name("Kiril").surname("Kozov").build());
         Car opel = carRepository.save(Car.builder().brand("opel").ownerId(kiril.getUserId()).build());
         Car mazda = carRepository.save(Car.builder().brand("mazda").ownerId(kiril.getUserId()).build());
         mockMvc.perform(get("/users/{id}/cars", kiril.getUserId())).andExpect(status().isOk()).andReturn();
@@ -66,7 +65,7 @@ public class UserControllerTest {
 
     @Test
     public void saveUserTest() throws Exception{
-        User vitalik = userRepository.save(User.builder().name("Vitalik").surname("Roi").build());
+        Owner vitalik = userRepository.save(Owner.builder().name("Vitalik").surname("Roi").build());
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/users")
                         .content(asJsonString(vitalik))
@@ -85,7 +84,7 @@ public class UserControllerTest {
 
     @Test
     public void saveCarUserTest() throws Exception{
-        User oleg = userRepository.save(User.builder().name("Oleg").surname("Popkin").build());
+        Owner oleg = userRepository.save(Owner.builder().name("Oleg").surname("Popkin").build());
         Car niva = carRepository.save(Car.builder().brand("niva").ownerId(oleg.getUserId()).build());
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/users/{id}/car", oleg.getUserId())
@@ -97,8 +96,8 @@ public class UserControllerTest {
 
     @Test
     public void updateUserTest() throws Exception{
-        User igor = userRepository.save(User.builder().name("Igor").surname("Kononov").build());
-        User updateUser = User.builder().name("Kosty").surname("Kononov").build();
+        Owner igor = userRepository.save(Owner.builder().name("Igor").surname("Kononov").build());
+        Owner updateUser = Owner.builder().name("Kosty").surname("Kononov").build();
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/users/{id}", igor.getUserId())
@@ -112,7 +111,7 @@ public class UserControllerTest {
 
     @Test
     public void deleteUserTest() throws Exception{
-        User nina = userRepository.save(User.builder().name("Nina").surname("Pavelchuk").build());
+        Owner nina = userRepository.save(Owner.builder().name("Nina").surname("Pavelchuk").build());
         mockMvc.perform(MockMvcRequestBuilders.delete("/users/{id}", nina.getUserId()))
                 .andExpect(status().isOk());
     }
